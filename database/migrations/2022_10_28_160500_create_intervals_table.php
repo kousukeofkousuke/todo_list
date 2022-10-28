@@ -15,6 +15,7 @@ class CreateIntervalsTable extends Migration
     {
         Schema::create('intervals', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedInteger('interval');
             $table->timestamps();
         });
     }
