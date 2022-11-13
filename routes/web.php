@@ -11,7 +11,16 @@
 |
 */
 
-Route::get('/', 'TaskController@index');
-Route::post('/tasks', 'TaskController@store');
-Route::get('/tasks/create', 'TaskController@create');
-Route::get('/tasks/{task}', 'TaskController@show');
+Route::group(['middleware' => ['auth']], function(){
+    Route::get('/', 'TaskController@index');
+    Route::post('/tasks', 'TaskController@store');
+    Route::get('/tasks/create', 'TaskController@create')->middleware('auth');
+    Route::get('/tasks/{task}/edit', 'TaskController@edit');
+    Route::get('/tasks/{task}/state', 'TaskController@state');
+    Route::put('/tasks/{task}', 'TaskController@update');
+    Route::get('/tasks/{task}', 'TaskController@show');
+    Route::get('/categories/{category}', 'CategoryController@index');
+    Route::post('/contact', 'MailableController@send');
+});
+
+Auth::routes();

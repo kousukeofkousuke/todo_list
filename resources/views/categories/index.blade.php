@@ -9,24 +9,17 @@
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
     </head>
     <body>
-        <h1>Task</h1>
         <div class='Tasks'>
             @foreach ($tasks as $task)
-                <div class='post'>
+            <h1>{{ $task->category->name }}</h1>
+                <div class='task'>
                     <h2 class='title'>
                         <a href="/tasks/{{ $task->id }}">{{ $task->title }}</a>
                     </h2>
-                    <p id='state'>
-                        <?php
-                            if($task->state == 1){
-                                echo '完了';
-                            }
-                        ?>
-                    </p>
                     <p class='deadline'>{{ $task->deadline }}</p>
                 </div>
             @endforeach
-            [<a href='/tasks/create'>create</a>]
+            [<a href="/">ホーム</a>]
         </div>
         <div class='paginate'>
             {{ $tasks->links() }}
